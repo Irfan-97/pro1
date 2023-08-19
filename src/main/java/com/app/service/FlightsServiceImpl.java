@@ -1,5 +1,9 @@
 package com.app.service;
 
+import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import javax.transaction.Transactional;
 
 import org.modelmapper.ModelMapper;
@@ -28,5 +32,20 @@ public class FlightsServiceImpl implements FlightsService {
 		Flights persistentFlight=flightsDao.save(flightEntity);
 		return mapper.map(persistentFlight, FlightsDTO.class);
 	}
+
+
+	@Override
+	public List<FlightsDTO> getFlights(String source, String destination, LocalDate journeyDate) {
+		List<Flights> flightsList=flightsDao.getallflights(source, 	destination, journeyDate);
+		
+		return flightsList.stream()
+				.map(fli->mapper.map(fli, FlightsDTO.class))
+				.collect(Collectors.toList());
+		
+		
+		
+	}
+	
+	
 
 }

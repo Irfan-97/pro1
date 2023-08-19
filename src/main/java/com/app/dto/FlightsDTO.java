@@ -20,8 +20,9 @@ import lombok.ToString;
 public class FlightsDTO {
 
 	
-	@JsonProperty(access=Access.READ_ONLY)
-	private Long flightNo;
+	private String flightSrNo;
+	
+	private String flightNo;
 	
 	
 	private String source;
@@ -34,7 +35,6 @@ public class FlightsDTO {
 	
 	
 	private LocalTime arrTime;
-	
 	
 	private LocalDate journeyDate;
 	

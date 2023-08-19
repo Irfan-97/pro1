@@ -26,9 +26,9 @@ public class UserServiceImpl implements UserService {
 	public UserDTO addNewUser(UserDTO user) {
 		User userEntity=mapper.map(user, User.class);
 		User persistentUser=userDao.save(userEntity);
-		return mapper.map(persistentUser, UserDTO.class);
-		
-		
+		return mapper.map(persistentUser, UserDTO.class);	
 	}
+	
+	
 
 }
