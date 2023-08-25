@@ -15,6 +15,7 @@ public interface FlightsRepository extends JpaRepository<Flights, Long> {
 	List<Flights> getallflights(String source, String destination, LocalDate journeyDate);
 	
 	Flights findByFlightSrNo(String flightSrNo);
+	Flights findByFlightSrNo(Flights flightSrNo);
 	
 	
 }

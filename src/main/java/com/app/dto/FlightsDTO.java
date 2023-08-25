@@ -38,5 +38,6 @@ public class FlightsDTO {
 	
 	private LocalDate journeyDate;
 	
+	private Long capacity;
 	
 }

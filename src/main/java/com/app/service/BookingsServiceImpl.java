@@ -35,28 +35,33 @@ public class BookingsServiceImpl implements BookingsService {
 	@Autowired
 	private ModelMapper mapper;
 	
+	
 	@Override
-	public String addBooking(BookingsDTO booking) {
-		Bookings bookingQuery=mapper.map(booking, Bookings.class);
-		User user = userRepo.findById(booking.getUserId()).orElse(null);
-		Flights flight =flightRepo.findByFlightSrNo(booking.getFlightSrNo());
-		bookingQuery.setUserId(user);
-		bookingQuery.setFlightSrNo(flight);
-		bookingDao.save(bookingQuery);
-		return "booking done successfully...";
+	public String addBookings(List<BookingsDTO> bookings) {
+		for(BookingsDTO b:bookings) {
+			Bookings bookingQuery=mapper.map(b, Bookings.class);
+			User user = userRepo.findById(b.getUserId()).orElse(null);
+			Flights flight =flightRepo.findByFlightSrNo(b.getFlightSrNo());
+			bookingQuery.setUserId(user);
+			bookingQuery.setFlightSrNo(flight);
+			bookingDao.save(bookingQuery);			
+		}
+		return "booking done successfully....";
 	}
 
-	@Override
-	public List<BookingsDTO> getBookings(Long userId) {
-		
-		//User user = userRepo.findByUserId(userId);
-		
-		List<Bookings> bookingList=bookingDao.myBookings(userId);
-		
-		return bookingList.stream()
-				.map(book->mapper.map(book, BookingsDTO.class))
-				.collect(Collectors.toList());
-	}
+	
+	
+//	@Override
+//	public List<BookingsDTO> getBookings(Long userId) {
+//		
+//		//User user = userRepo.findByUserId(userId);
+//		
+//		List<Bookings> bookingList=bookingDao.myBookings(userId);
+//		
+//		return bookingList.stream()
+//				.map(book->mapper.map(book, BookingsDTO.class))
+//				.collect(Collectors.toList());
+//	}
 
 	
 		

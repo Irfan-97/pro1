@@ -29,7 +29,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
+@ToString(exclude="ticketList")
 
 public class User {
 	
@@ -40,7 +40,7 @@ public class User {
 	@Column
 	private String name;
 	
-	@Column
+	@Column(unique=true)
 	private String email;
 	
 	@Column
@@ -68,12 +68,12 @@ public class User {
 	
 	public void addTicket(Bookings ticket) {
 		ticketList.add(ticket);
-		//ticket.setUserId(this);
+		ticket.setUserId(this);
 	}
 	
 	public void removeTicket(Bookings ticket) {
 		ticketList.remove(ticket);
-		//ticket.setUserId(null);
+		ticket.setUserId(null);
 	}
 	
 	

@@ -26,7 +26,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString(exclude={"userId, flightSrNo"})
+@ToString(exclude={"userId,flightSrNo"})
 
 public class Bookings {
 	

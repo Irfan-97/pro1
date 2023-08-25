@@ -21,6 +21,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Table(name="flights")
@@ -28,6 +29,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
+@ToString(exclude="fTicketList")
 
 public class Flights {
 	
@@ -51,6 +53,9 @@ public class Flights {
 	
 	@Column
 	private LocalDate journeyDate;
+	
+	@Column
+	private Long capacity;
 	
 	
 	@OneToMany(mappedBy = "flightSrNo", cascade = CascadeType.ALL, orphanRemoval = true)

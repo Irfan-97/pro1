@@ -10,8 +10,8 @@ import com.app.entities.User;
 
 public interface BookingsService {
 	
-	String addBooking(BookingsDTO booking);
+	 String addBookings(List<BookingsDTO> bookings);
 	
-	List<BookingsDTO> getBookings(Long userId);
+	//List<BookingsDTO> getBookings(Long userId);
 	
 }

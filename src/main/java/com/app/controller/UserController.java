@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.app.dto.BookingsDTO;
 import com.app.dto.FlightsDTO;
+import com.app.dto.SignInRequestDTO;
 import com.app.dto.UserDTO;
 import com.app.entities.Bookings;
 import com.app.service.BookingsService;
@@ -41,23 +42,27 @@ public class UserController {
 	}
 	
 	
+	
+	
 	@PostMapping("/bookticket")
-	public ResponseEntity<?> bookTicket(@RequestBody @Valid BookingsDTO dto){
+	public ResponseEntity<?> bookTicket(@RequestBody @Valid List<BookingsDTO> dto){
 		System.out.println("booking ticket...");
-		return ResponseEntity.status(HttpStatus.CREATED).body(bookingService.addBooking(dto));
+		return ResponseEntity.status(HttpStatus.CREATED).body(bookingService.addBookings(dto));
 		
 	}
 	
-	@GetMapping("/mybookings/{userid}")
+	@GetMapping("/{userid}/mybookings")
 	public ResponseEntity<?> getMyBooking(@PathVariable Long userid){
 		System.out.println("searching for  myBookings");
 		
-		List<BookingsDTO> list=bookingService.getBookings(userid);
-		if(list.isEmpty())
-			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+		return ResponseEntity.ok(userService.getUserAndBookingDetails(userid));
 		
-		return ResponseEntity.ok(list);
-		
+	}
+	
+	@PostMapping("/signin")
+	public ResponseEntity<?> authenticateUser(@RequestBody @Valid SignInRequestDTO sdto){
+		System.out.println("authenticating user....");
+		return ResponseEntity.status(HttpStatus.ACCEPTED).body(userService.authenticatUser(sdto.getEmail(),sdto.getPassword()));
 	}
 	
 	
